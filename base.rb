@@ -5,15 +5,17 @@ gem 'thoughtbot-shoulda', :lib => 'shoulda'
 gem 'factory_girl'
 gem 'haml'
 gem 'cucumber'
+gem 'rspec'
+gem 'mysql'
 gem 'seess'
 
 rake 'gems:install'
 
 # prompt for something
-if yes?("Do you want to...")
+# if yes?("Do you want to...")
   # the stuff you wanted to do
-  puts "you wanted to..."
-end
+  # puts "you wanted to..."
+# end
 
 # to get input from user
 # var = ask('My question here?')
