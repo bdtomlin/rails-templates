@@ -9,9 +9,9 @@ run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public
 
 gem 'devise', '1.1.rc1'
 
-gem "rspec", "2.0.0.beta.9", :group => :test
-gem "rspec-rails",      ">= 2.0.0.beta.9.1", :group => :test
-gem "factory_girl", "1.2.5.beta1", :git => "git://github.com/thoughtbot/factory_girl.git", :branch => "fixes_for_rails3", :group => :test
+gem "rspec", "2.0.0.beta.11", :group => :test
+gem "rspec-rails",      ">= 2.0.0.beta.11", :group => :test
+gem "factory_girl", "1.3.0", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
 gem "autotest-rails", :group => :test
