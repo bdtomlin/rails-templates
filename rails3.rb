@@ -8,6 +8,7 @@ run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jqu
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
 gem 'devise', '1.1.rc1'
+gem 'mysql'
 
 gem "rspec", "2.0.0.beta.11", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.11", :group => :test
@@ -19,7 +20,9 @@ gem "cucumber", :group => :test
 gem "cucumber-rails", :group => :test
 gem "database_cleaner", :group => :test
 gem "capybara", :group => :test
-gem "ruby-debug", :group => :test
+
+run "bundle install"
+
 run 'rails g rspec:install'
 run 'rails g cucumber:skeleton --capybara --rspec'
 
