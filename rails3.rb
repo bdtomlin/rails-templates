@@ -24,7 +24,7 @@ gem "capybara", :group => :test
 run "bundle install"
 
 run 'rails g rspec:install'
-run 'rails g cucumber:skeleton --capybara --rspec'
+run 'rails g cucumber:install --capybara --rspec'
 
 run 'rm .gitignore'
 file '.gitignore', <<-FILE
