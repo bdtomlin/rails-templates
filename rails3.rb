@@ -9,6 +9,7 @@ run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public
 
 gem 'devise', '1.1.rc1'
 gem 'mysql'
+gem 'haml'
 
 gem "rspec", "2.0.0.beta.11", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.11", :group => :test
