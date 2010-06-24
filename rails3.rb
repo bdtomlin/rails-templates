@@ -13,6 +13,7 @@ gem 'haml'
 gem "rspec", "2.0.0.beta.11", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.11", :group => :test
 gem "factory_girl", :group => :test
+gem "factory_girl_rails", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
 gem "autotest-rails", :group => :test
