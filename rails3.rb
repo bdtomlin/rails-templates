@@ -1,6 +1,6 @@
 run 'rm README'
 run 'touch README'
-# run 'rm public/index.html'
+run 'rm public/index.html'
 run 'rm public/images/rails.png'
 run 'rm public/javascripts/*.js'
 run 'mkdir public/javascripts/jquery'
@@ -28,7 +28,8 @@ run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec'
 
 run 'rm .gitignore'
-file '.gitignore', <<-FILE
+file '.gitignore',
+%{
 .bundle
 log/*
 tmp/**/*
@@ -37,7 +38,7 @@ db/*.sqlite3
 coverage/*
 *.swp
 *.swo
-FILE
+}
 
 git :init
 git :add => '.'
