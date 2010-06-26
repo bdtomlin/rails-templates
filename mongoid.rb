@@ -11,8 +11,10 @@ run 'mkdir public/javascripts/jquery'
 run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jquery/jquery-1.4.2.min.js"
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
-gem 'bson_ext'
-gem 'mongo_mapper'
+gem "mongoid", "2.0.0.beta7"
+gem "bson_ext", "1.0.1"
+
+
 gem 'haml'
 
 
@@ -25,28 +27,14 @@ gem "autotest-rails", :group => :test
 gem "cucumber", :group => :test
 gem "cucumber-rails", :group => :test
 gem "capybara", :group => :test
+gem "launchy", :group => :test
+gem "database_cleaner", :group => :test
 
-# run "bundle install"
+run "bundle install"
 
+run "rails generate mongoid:config"
 run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec --skip-database'
-
-run "mv spec/spec_helper.rb spec/spec_helper.rb.example"
-
-file "spec/spec_helper.rb",
-'
-ENV["RAILS_ENV"] ||= "test"
-require File.dirname(__FILE__) + "/../config/environment" unless defined?(Rails)
-require "rspec/rails"
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
-
-Rspec.configure do |config|
-  config.mock_with :rspec
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.after(:all) { MongoMapper.database.collections.each {|c| c.remove} }
-end
-'
 
 run 'rm .gitignore'
 file '.gitignore',
