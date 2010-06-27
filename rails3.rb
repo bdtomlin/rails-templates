@@ -21,7 +21,7 @@ gem "cucumber-rails", :group => :test
 gem "capybara", :group => :test
 gem "launchy", :group => :test
 
-db = ask("Press 1 for Mongoid and 2 for Active Record").to_i
+db = ask("1 for Mongoid, 2 for Active Record: ").to_i
 
 if db == 1
   gem "mongoid", "2.0.0.beta7"
@@ -48,7 +48,48 @@ elsif db == 2
 
   run 'rails g rspec:install'
   run 'rails g cucumber:install --capybara --rspec'
+
+elsif db == 3
+  gem 'bson_ext'
+  gem 'mongo_mapper'
+  gem 'mongo_ext'
+
+  run "bundle install"
+
+  run 'rails g rspec:install'
+  run 'rails g cucumber:install --capybara --rspec --skip-database'
+
+  file 'features/support/env.custom.rb', %{
+  ENV["RAILS_ENV"] ||= "test"
+  require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+
+  MongoMapper.database.collections.each { |c| c.remove }
+  }
+
 end
+
+run 'rm app/views/layouts/application.html.erb'
+file "app/views/layouts/application.html.haml", %{
+!!! 5
+%html
+  %head
+    %title Site Title
+    = stylesheet_link_tag :all
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
+  %body
+    = yield
+}
+
+run "git clone git@github.com:bdtomlin/rails3_haml_scaffold_generator.git lib/generators/haml"
+
+
+application %{
+    config.generators do |g|
+      g.template_engine :haml
+    end
+}
+
 
 run 'rm .gitignore'
 file '.gitignore',
