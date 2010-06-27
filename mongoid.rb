@@ -1,7 +1,3 @@
-def append_to(file, content)
-  run %{ echo "#{content}" >> #{file} }
-end
-
 run 'rm README'
 run 'touch README'
 run 'rm public/index.html'
@@ -15,13 +11,12 @@ gem "mongoid", "2.0.0.beta7"
 gem "bson_ext", "1.0.1"
 gem 'mongo_ext'
 
-gem 'haml'
-
-
+gem "haml"
 gem "shoulda"
 gem "rspec", "2.0.0.beta.12", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.12", :group => :test
 gem "factory_girl", :group => :test
+gem "factory_girl_rails", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
 gem "autotest-rails", :group => :test
