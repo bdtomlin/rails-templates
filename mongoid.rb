@@ -38,7 +38,7 @@ file 'features/support/env.custom.rb', %{
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
-Before { Mongoid.master.collections.each(&:drop) }
+Before { Mongoid.collections.each { |c| c.remove } }
 }
 
 run 'rm .gitignore'
