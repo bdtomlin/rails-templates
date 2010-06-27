@@ -14,7 +14,6 @@ run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public
 gem "mongoid", "2.0.0.beta7"
 gem "bson_ext", "1.0.1"
 
-
 gem 'haml'
 
 
@@ -28,13 +27,16 @@ gem "cucumber", :group => :test
 gem "cucumber-rails", :group => :test
 gem "capybara", :group => :test
 gem "launchy", :group => :test
-gem "database_cleaner", :group => :test
 
 run "bundle install"
 
 run "rails generate mongoid:config"
 run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec --skip-database'
+
+file 'features/support/env.custom.rb', %{
+Before { Mongoid.master.collections.each(&:drop) }
+}
 
 run 'rm .gitignore'
 file '.gitignore',
