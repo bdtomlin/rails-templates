@@ -35,6 +35,9 @@ run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec --skip-database'
 
 file 'features/support/env.custom.rb', %{
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+
 Before { Mongoid.master.collections.each(&:drop) }
 }
 
