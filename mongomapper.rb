@@ -13,10 +13,12 @@ run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public
 
 gem 'bson_ext'
 gem 'mongo_mapper'
+gem 'mongo_ext'
 
 gem 'haml'
 
 
+gem "shoulda"
 gem "rspec", "2.0.0.beta.12", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.12", :group => :test
 gem "factory_girl", :group => :test
