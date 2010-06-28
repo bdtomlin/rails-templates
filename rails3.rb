@@ -75,7 +75,8 @@ file "app/views/layouts/application.html.haml", %{
   %head
     %title Site Title
     = stylesheet_link_tag :all
-    = javascript_include_tag :defaults
+    = javascript_include_tag 'jquery/jquery-1.4.2.min.js'
+    = javascript_include_tag 'rails.js'
     = csrf_meta_tag
   %body
     = yield
