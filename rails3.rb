@@ -37,7 +37,7 @@ if db == 1
   ENV["RAILS_ENV"] ||= "test"
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
-  Before { Mongoid.collections.each { |c| c.remove } }
+  Before { Mongoid.master.collections.each { |c| c.remove } }
   }
   run "rails generate mongoid:config"
 
