@@ -21,7 +21,7 @@ gem "cucumber-rails", :group => :test
 gem "capybara", :group => :test
 gem "launchy", :group => :test
 
-db = ask("1 for Mongoid, 2 for Active Record: ").to_i
+db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
 
 if db == 1
   gem "mongoid", "2.0.0.beta7"
@@ -42,14 +42,6 @@ if db == 1
   run "rails generate mongoid:config"
 
 elsif db == 2
-  gem 'mysql'
-
-  run "bundle install"
-
-  run 'rails g rspec:install'
-  run 'rails g cucumber:install --capybara --rspec'
-
-elsif db == 3
   gem 'bson_ext'
   gem 'mongo_mapper'
   gem 'mongo_ext'
@@ -65,6 +57,14 @@ elsif db == 3
 
   MongoMapper.database.collections.each { |c| c.remove }
   }
+
+elsif db == 3
+  gem 'mysql'
+
+  run "bundle install"
+
+  run 'rails g rspec:install'
+  run 'rails g cucumber:install --capybara --rspec'
 
 end
 
