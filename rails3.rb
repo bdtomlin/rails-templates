@@ -8,7 +8,7 @@ run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jqu
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
 gem "haml"
-gem "shoulda"
+gem "shoulda", :group => :test
 gem "rspec", "2.0.0.beta.14", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.14.1", :group => :test
 gem "factory_girl", :group => :test
@@ -16,9 +16,9 @@ gem "factory_girl_rails", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
 gem "autotest-rails", :group => :test
-gem "cucumber", :group => :test
-gem "cucumber-rails", :group => :test
 gem "capybara", :group => :test
+gem "cucumber-rails", :group => :test
+gem "cucumber", :group => :test
 gem "launchy", :group => :test
 
 db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
