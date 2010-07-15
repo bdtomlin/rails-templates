@@ -24,9 +24,9 @@ gem "launchy", :group => :test
 db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
 
 if db == 1
-  gem "mongoid", "2.0.0.beta7"
-  gem "bson_ext", "1.0.1"
   gem 'mongo_ext'
+  gem "bson_ext", "1.0.1"
+  gem "mongoid", "2.0.0.beta7"
 
   run "bundle install"
 
@@ -42,9 +42,9 @@ if db == 1
   run "rails generate mongoid:config"
 
 elsif db == 2
+  gem 'mongo_ext'
   gem 'bson_ext'
   gem 'mongo_mapper'
-  gem 'mongo_ext'
 
   run "bundle install"
 
