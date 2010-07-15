@@ -85,6 +85,7 @@ run "git clone git@github.com:bdtomlin/rails3_haml_scaffold_generator.git lib/ge
 application %{
     config.generators do |g|
       g.template_engine :haml
+      g.test_framework :rspec, :fixture => false
     end
 }
 
