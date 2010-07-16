@@ -22,9 +22,9 @@ gem "launchy", :group => :test
 db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
 
 if db == 1
-  gem "mongoid", "2.0.0.beta9"
+  gem "mongo", "1.0.4"
   gem "bson_ext", "1.0.4"
-  gem 'mongo_ext', "1.0.4"
+  gem "mongoid", "2.0.0.beta9"
 
   run "bundle install"
 
@@ -40,9 +40,9 @@ if db == 1
   run "rails generate mongoid:config"
 
 elsif db == 2
-  gem 'mongo_mapper'
+  gem "mongo", "1.0.4"
   gem "bson_ext", "1.0.4"
-  gem 'mongo_ext', "1.0.4"
+  gem 'mongo_mapper'
 
   run "bundle install"
 
@@ -86,6 +86,7 @@ run "rails generate devise:install"
 application %{
     config.generators do |g|
       g.template_engine :haml
+      g.test_framework :rspec, :fixture => false
     end
 }
 
