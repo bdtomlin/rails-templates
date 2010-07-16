@@ -8,6 +8,7 @@ run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jqu
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
 gem "haml"
+gem "devise", ">=1.1.rc2"
 gem "shoulda", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.17", :group => :test
 gem "factory_girl_rails", :group => :test
@@ -22,8 +23,8 @@ db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
 
 if db == 1
   gem "mongoid", "2.0.0.beta9"
-  gem "bson_ext", "1.0.1"
-  gem 'mongo_ext'
+  gem "bson_ext", "1.0.4"
+  gem 'mongo_ext', "1.0.4"
 
   run "bundle install"
 
@@ -39,9 +40,9 @@ if db == 1
   run "rails generate mongoid:config"
 
 elsif db == 2
-  gem 'bson_ext'
   gem 'mongo_mapper'
-  gem 'mongo_ext'
+  gem "bson_ext", "1.0.4"
+  gem 'mongo_ext', "1.0.4"
 
   run "bundle install"
 
@@ -80,7 +81,7 @@ file "app/views/layouts/application.html.haml", %{
 }
 
 run "git clone git@github.com:bdtomlin/rails3_haml_scaffold_generator.git lib/generators/haml"
-
+run "rails generate devise:install"
 
 application %{
     config.generators do |g|
