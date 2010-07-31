@@ -8,6 +8,7 @@ run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jqu
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
 gem "haml"
+gem "hpricot" # for turning devise views into haml
 gem "devise", ">=1.1.rc2"
 gem "shoulda", :group => :test
 gem "rspec-rails",      ">= 2.0.0.beta.19", :group => :test
