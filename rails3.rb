@@ -65,9 +65,10 @@ gem "escape_utils"
 file 'config/initializers/escape_utils_monkey_patch.rb',
 %{
 require 'escape_utils/html/rack' # to patch Rack::Utils
-require 'escape_utils/html/erb' # to patch ERB::Util
-require 'escape_utils/html/cgi' # to patch CGI
-require 'escape_utils/html/haml' # to patch Haml::Helpers
+# commented out because they cause problems with links in emails
+# require 'escape_utils/html/erb' # to patch ERB::Util
+# require 'escape_utils/html/cgi' # to patch CGI
+# require 'escape_utils/html/haml' # to patch Haml::Helpers
 
 module Rack
   module Utils
