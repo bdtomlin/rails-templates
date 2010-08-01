@@ -24,6 +24,13 @@ gem "email_spec", :group => :test
 run "bundle install"
 
 run "rails generate email_spec:steps"
+email_steps_path = 'features/step_definitions/email_steps.rb'
+email_steps_content = File.read(email_steps_path)
+file email_steps_path, %{require 'email-spec'
+World(EmailSpec::Helpers)
+#{email_steps_content}
+}
+
 run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec'
 
