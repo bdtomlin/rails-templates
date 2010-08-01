@@ -108,6 +108,7 @@ module Rack
   end
 end
 }
+plugin 'dynamic_form', :git => "git://github.com/rails/dynamic_form.git"
 
 run 'rm .gitignore'
 file '.gitignore',
