@@ -93,7 +93,7 @@ application %{
 
 # to fix problem with Rack::Utils::EscapeUtils
 gem "escape_utils"
-file 'initializeers/escape_utils_monkey_patch.rb',
+file 'config/initializeers/escape_utils_monkey_patch.rb',
 %{
 require 'escape_utils/html/rack' # to patch Rack::Utils
 require 'escape_utils/html/erb' # to patch ERB::Util
