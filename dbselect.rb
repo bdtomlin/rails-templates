@@ -8,10 +8,9 @@ run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jqu
 run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js'
 
 gem "haml"
-gem "hpricot" # for turning devise views into haml
 gem "devise", ">=1.1.rc2"
 gem "shoulda", :group => :test
-gem "rspec-rails",      ">= 2.0.0.beta.19", :group => :test
+gem "rspec-rails",      ">= 2.0.0.beta.17", :group => :test
 gem "factory_girl_rails", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
@@ -19,22 +18,54 @@ gem "autotest-rails", :group => :test
 gem "capybara", :group => :test
 gem "cucumber-rails", :group => :test
 gem "launchy", :group => :test
-gem "email_spec", :group => :test
 
-run "bundle install"
+db = ask("1 for Mongoid, 2 for MongoMapper, 3 for Active Record: ").to_i
 
-run "rails generate email_spec:steps"
-email_steps_path = 'features/step_definitions/email_steps.rb'
-email_steps_content = File.read(email_steps_path)
-run "rm #{email_steps_path}"
-file email_steps_path, %{require 'email-spec'
-World(EmailSpec::Helpers)
-#{email_steps_content}
-}
+if db == 1
+  gem "mongo", "1.0.4"
+  gem "bson_ext", "1.0.4"
+  gem "mongoid", "2.0.0.beta9"
 
-run 'rails g rspec:install'
-run 'rails g cucumber:install --capybara --rspec'
+  run "bundle install"
 
+  run 'rails g rspec:install'
+  run 'rails g cucumber:install --capybara --rspec --skip-database'
+
+  file 'features/support/env.custom.rb', %{
+  ENV["RAILS_ENV"] ||= "test"
+  require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+
+  Before { Mongoid.master.collections.each { |c| c.remove } }
+  }
+  run "rails generate mongoid:config"
+
+elsif db == 2
+  gem "mongo", "1.0.4"
+  gem "bson_ext", "1.0.4"
+  gem 'mongo_mapper'
+  gem 'mongo_ext'
+
+  run "bundle install"
+
+  run 'rails g rspec:install'
+  run 'rails g cucumber:install --capybara --rspec --skip-database'
+
+  file 'features/support/env.custom.rb', %{
+  ENV["RAILS_ENV"] ||= "test"
+  require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+
+  MongoMapper.database.collections.each { |c| c.remove }
+  }
+
+elsif db == 3
+  gem 'mysql'
+
+  run "bundle install"
+
+  run 'rails g rspec:install'
+  run 'rails g cucumber:install --capybara --rspec'
+
+end
 
 run 'rm app/views/layouts/application.html.erb'
 file "app/views/layouts/application.html.haml", %{
@@ -60,25 +91,6 @@ application %{
     end
 }
 
-# to fix problem with Rack::Utils::EscapeUtils
-gem "escape_utils"
-file 'config/initializers/escape_utils_monkey_patch.rb',
-%{
-require 'escape_utils/html/rack' # to patch Rack::Utils
-# commented out because they cause problems with links in emails
-# require 'escape_utils/html/erb' # to patch ERB::Util
-# require 'escape_utils/html/cgi' # to patch CGI
-# require 'escape_utils/html/haml' # to patch Haml::Helpers
-
-module Rack
-  module Utils
-    def escape(s)
-      EscapeUtils.escape_url(s)
-    end
-  end
-end
-}
-plugin 'dynamic_form', :git => "git://github.com/rails/dynamic_form.git"
 
 run 'rm .gitignore'
 file '.gitignore',
@@ -96,4 +108,3 @@ coverage/*
 git :init
 git :add => '.'
 git :commit => "-a -m 'Initial commit'"
-
