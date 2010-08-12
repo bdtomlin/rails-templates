@@ -43,6 +43,7 @@ elsif db == 2
   gem "mongo", "1.0.4"
   gem "bson_ext", "1.0.4"
   gem 'mongo_mapper'
+  gem 'mongo_ext'
 
   run "bundle install"
 
