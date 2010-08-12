@@ -35,7 +35,6 @@ World(EmailSpec::Helpers)
 run 'rails g rspec:install'
 run 'rails g cucumber:install --capybara --rspec'
 
-
 run 'rm app/views/layouts/application.html.erb'
 file "app/views/layouts/application.html.haml", %{
 !!! 5
