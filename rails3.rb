@@ -9,9 +9,11 @@ run 'curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public
 
 gem "haml"
 gem "hpricot" # for turning devise views into haml
-gem "devise", ">=1.1.2"
+gem "devise"
+gem "ruby_parser"
+
 gem "shoulda", :group => :test
-gem "rspec-rails", ">= 2.0.0.beta.19", :group => :test
+gem "rspec-rails", ">= 2.0.0.beta.20", :group => :test
 gem "factory_girl_rails", :group => :test
 gem "ZenTest", :group => :test
 gem "autotest", :group => :test
