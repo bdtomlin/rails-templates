@@ -8,6 +8,7 @@ gem "hpricot" # for turning devise views into haml
 gem "devise"
 gem "ruby_parser"
 gem 'jquery-rails'
+gem "compass"
 gem "html5-boilerplate"
 
 gem "shoulda", :group => :test
@@ -40,7 +41,7 @@ run 'rails g cucumber:install --capybara --rspec'
 run 'rm app/views/layouts/application.html.erb'
 
 run "rails generate devise:install"
-run "compass init rails -r html5-boilerplate -u html5-boilerplate --force"
+run "compass init rails -r html5-boilerplate -u html5-boilerplate --force --sass-dir app/stylesheets --css-dir public/stylesheets"
 
 application %{
     config.generators do |g|
