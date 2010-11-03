@@ -1,5 +1,5 @@
 run 'rm README'
-run 'touch README'
+run 'touch README.rdoc'
 run 'rm public/index.html'
 run 'rm public/images/rails.png'
 
@@ -8,8 +8,6 @@ gem "hpricot" # for turning devise views into haml
 gem "devise"
 gem "ruby_parser"
 gem 'jquery-rails'
-gem "compass"
-gem "html5-boilerplate"
 
 gem "shoulda", :group => :test
 gem "rspec-rails", ">= 2.0.0.rc", :group => :test
@@ -41,7 +39,6 @@ run 'rails g cucumber:install --capybara --rspec'
 run 'rm app/views/layouts/application.html.erb'
 
 run "rails generate devise:install"
-run "compass init rails -r html5-boilerplate -u html5-boilerplate --force --sass-dir app/stylesheets --css-dir public/stylesheets"
 
 application %{
     config.generators do |g|
@@ -50,37 +47,24 @@ application %{
     end
 }
 
-# to fix problem with Rack::Utils::EscapeUtils
-#gem "escape_utils"
-#file 'config/initializers/escape_utils_monkey_patch.rb',
-#%{
-#require 'escape_utils/html/rack' # to patch Rack::Utils
-## commented out because they cause problems with links in emails
-## require 'escape_utils/html/erb' # to patch ERB::Util
-## require 'escape_utils/html/cgi' # to patch CGI
-## require 'escape_utils/html/haml' # to patch Haml::Helpers
-
-#module Rack
-  #module Utils
-    #def escape(s)
-      #EscapeUtils.escape_url(s)
-    #end
-  #end
-#end
-#}
 plugin 'dynamic_form', :git => "git://github.com/rails/dynamic_form.git"
 
 run 'rm .gitignore'
 file '.gitignore',
 %{
 .bundle
-log/*
+db/*.sqlite3*
+log/*.log
+*.log
 tmp/**/*
-db/*.sqlite3
-*.DS_Store
-coverage/*
+tmp/*
+doc/api
+doc/app
 *.swp
 *.swo
+*~
+.DS_Store
+coverage/*
 }
 
 git :init
